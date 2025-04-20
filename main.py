@@ -11,13 +11,32 @@ def main():
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+    # Create the two required groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    
+    # Set these groups as containers for the Player class
+    Player.containers = (updatable, drawable)
+
     playerone = Player((SCREEN_WIDTH / 2), (SCREEN_HEIGHT / 2))
     stillrunning = 1
     clock = pygame.time.Clock()
     dt = 0
     while stillrunning == 1:
         screen.fill((0, 0, 0))
-        playerone.draw(screen)
+        
+        # old# playerone.update(dt)
+        # old# playerone.draw(screen)
+
+         # Update all objects in the updatable group
+        updatable.update(dt)
+        
+        # Draw all objects in the drawable group
+        for obj in drawable:
+            obj.draw(screen)
+
+
+        
         pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
