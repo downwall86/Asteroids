@@ -45,12 +45,19 @@ def main():
          # Update all objects in the updatable group
         updatable.update(dt)
 
-        # iterate over asteroids
-        for obj in asteroids:
-            if playerone.collisionCheck(obj) == True:
+        for asteroid in asteroids:  # This creates a variable called 'asteroid' for each item in 'asteroids'
+    # Check player collision
+            if playerone.collisionCheck(asteroid) == True:
                 print("Game Over!")
                 pygame.quit()
                 sys.exit()
+    
+    # For each asteroid, check collision with each bullet
+            for bullet in shots:
+                if bullet.collisionCheck(asteroid) == True:
+                    print("hit")
+                    bullet.kill()
+                    asteroid.kill()
             
         
         # Draw all objects in the drawable group
