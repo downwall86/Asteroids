@@ -37,6 +37,7 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
     while stillrunning == 1:
+        #print(f"dt: {dt}, movement: {PLAYER_SPEED * dt}")
         screen.fill((0, 0, 0))
         
         # old# playerone.update(dt)
@@ -57,7 +58,7 @@ def main():
                 if bullet.collisionCheck(asteroid) == True:
                     print("hit")
                     bullet.kill()
-                    asteroid.kill()
+                    AstField.split_asteroid(asteroid)
             
         
         # Draw all objects in the drawable group
@@ -71,6 +72,7 @@ def main():
             if event.type == pygame.QUIT:
                 return 
         dt = (clock.tick(60)) / 1000
+        dt = min(dt, 0.033)
       
 
 
